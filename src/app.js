@@ -17,17 +17,23 @@ const app = express();
 app.use(helmet());
 
 // CORS configuration
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://yourdomain.com'] // Replace with your production domain
-    : [
-        'http://localhost:3000', 
-        'http://localhost:3001', 
-        'http://localhost:5173', 
-        'http://localhost:8080'
-      ],
-  credentials: true
-}));
+/ app.use(cors({
+//   origin: process.env.NODE_ENV === 'production' 
+//     ? ['https://thakorfootwarebe.onrender.com','https://thakor-foot-ware-admin.vercel.app'] // Replace with your production domain
+//     : [
+//         'http://localhost:3000', 
+//         'http://localhost:3001', 
+//         'http://localhost:5173', 
+//         'http://localhost:8080'
+//       ],
+//   credentials: true
+// }));
+
+app.use(
+  cors({
+    origin: "*", // ✅ Allow requests from any domain
+  })
+);
 
 // Rate limiting
 // const limiter = rateLimit({
