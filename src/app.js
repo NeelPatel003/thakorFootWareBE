@@ -17,7 +17,7 @@ const app = express();
 app.use(helmet());
 
 // CORS configuration
-/ app.use(cors({
+// app.use(cors({
 //   origin: process.env.NODE_ENV === 'production' 
 //     ? ['https://thakorfootwarebe.onrender.com','https://thakor-foot-ware-admin.vercel.app'] // Replace with your production domain
 //     : [
