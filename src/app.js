@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
+
 // Import routes
 const adminRoutes = require('./routes/admin');
 const categoryRoutes = require('./routes/category');
@@ -75,6 +76,9 @@ app.use('*', (req, res) => {
     message: 'Route not found'
   });
 });
+
+
+
 
 // Global error handler
 app.use((err, req, res, next) => {

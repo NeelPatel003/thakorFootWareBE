@@ -1,5 +1,7 @@
 const app = require('./app');
 const connectDB = require('./config/database');
+const cron = require('node-cron');
+const axios = require('axios');
 
 const PORT = process.env.PORT || 3000;
 
@@ -11,6 +13,18 @@ const server = app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
   console.log(`📊 Health check: http://localhost:${PORT}/health`);
   console.log(`🔐 Admin API: http://localhost:${PORT}/api/admin`);
+});
+
+
+const HEALTH_URL = 'https://thakorfootwarebe.onrender.com/health';
+
+cron.schedule('*/10 * * * *', async () => {
+  try {
+    const response = await axios.get(HEALTH_URL);
+    console.log(`[CRON] Health ping successful: ${response.status} ${new Date().toISOString()}`);
+  } catch (error) {
+    console.error('[CRON] Health ping failed:', error.message);
+  }
 });
 
 // Handle unhandled promise rejections
