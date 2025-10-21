@@ -7,6 +7,7 @@ require('dotenv').config();
 // Import routes
 const adminRoutes = require('./routes/admin');
 const categoryRoutes = require('./routes/category');
+const publicCategoryRoutes = require('./routes/publicCategory');
 const sizeRoutes = require('./routes/size');
 const productRoutes = require('./routes/product');
 
@@ -16,23 +17,17 @@ const app = express();
 app.use(helmet());
 
 // CORS configuration
-// app.use(cors({
-//   origin: process.env.NODE_ENV === 'production' 
-//     ? ['https://thakorfootwarebe.onrender.com','https://thakor-foot-ware-admin.vercel.app'] // Replace with your production domain
-//     : [
-//         'http://localhost:3000', 
-//         'http://localhost:3001', 
-//         'http://localhost:5173', 
-//         'http://localhost:8080'
-//       ],
-//   credentials: true
-// }));
-
-app.use(
-  cors({
-    origin: "*", // ✅ Allow requests from any domain
-  })
-);
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://yourdomain.com'] // Replace with your production domain
+    : [
+        'http://localhost:3000', 
+        'http://localhost:3001', 
+        'http://localhost:5173', 
+        'http://localhost:8080'
+      ],
+  credentials: true
+}));
 
 // Rate limiting
 // const limiter = rateLimit({
@@ -63,6 +58,7 @@ app.get('/health', (req, res) => {
 // API routes
 app.use('/api/admin', adminRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/public/categories', publicCategoryRoutes);
 app.use('/api/sizes', sizeRoutes);
 app.use('/api/products', productRoutes);
 

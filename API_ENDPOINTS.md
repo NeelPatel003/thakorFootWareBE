@@ -2,7 +2,29 @@
 
 ## Category Endpoints
 
-All category endpoints require admin authentication.
+### Public Category Endpoints
+
+These endpoints are publicly accessible and do not require authentication.
+
+#### Get All Categories (Public)
+- **GET** `/api/public/categories`
+- **Query Parameters**:
+  - `page` (optional): Page number (default: 1)
+  - `limit` (optional): Items per page (default: 10)
+  - `search` (optional): Search by category name
+- **Response**: Paginated list of categories (public fields only: name, categoryCode, slug, createdAt)
+
+#### Get Category by ID (Public)
+- **GET** `/api/public/categories/:id`
+- **Response**: Single category (public fields only: name, categoryCode, slug, createdAt)
+
+#### Get Category by Slug (Public)
+- **GET** `/api/public/categories/slug/:slug`
+- **Response**: Single category (public fields only: name, categoryCode, slug, createdAt)
+
+### Admin Category Endpoints
+
+All admin category endpoints require admin authentication.
 
 ### Create Category
 - **POST** `/api/categories`
